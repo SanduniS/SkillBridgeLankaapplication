@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "sandu418/SeekerService"      // change to your Docker Hub username & service name
+        DOCKER_IMAGE = "sandu418/seekerservice"      // change to your Docker Hub username & service name
         DOCKER_TAG = "latest"
     }
 
