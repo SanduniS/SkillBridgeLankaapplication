@@ -4,6 +4,11 @@ pipeline {
     environment {
         DOCKER_IMAGE = "sandu418/jobservice"      // change to your Docker Hub username & service name
         DOCKER_TAG = "latest"
+        DB_URL = "jdbc:mysql://host.docker.internal:3306/JobService"
+        DB_USER      = "root"
+        DB_PASS      = ""
+        CONTAINER_NAME = "jobservice-container"
+        APP_PORT     = "8083"
     }
 
     stages {

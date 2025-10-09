@@ -4,6 +4,11 @@ pipeline {
     environment {
         DOCKER_IMAGE = "sandu418/recruiterservice"      // change to your Docker Hub username & service name
         DOCKER_TAG = "latest"
+        DB_URL = "jdbc:mysql://host.docker.internal:3306/RecruiterService"
+        DB_USER      = "root"
+        DB_PASS      = ""
+        CONTAINER_NAME = "recruiterservice-container"
+        APP_PORT     = "8081"
     }
 
     stages {
