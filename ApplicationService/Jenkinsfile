@@ -4,6 +4,11 @@ pipeline {
     environment {
         DOCKER_IMAGE = "sandu418/applicationservice"      // change to your Docker Hub username & service name
         DOCKER_TAG = "latest"
+        DB_URL       = "jdbc:mysql://host.docker.internal:3306/ApplicationService"
+        DB_USER      = "root"
+        DB_PASS      = ""
+        CONTAINER_NAME = "applicationservice-container"
+        APP_PORT     = "8088"
     }
 
     stages {
@@ -40,5 +45,19 @@ pipeline {
                 bat "docker push ${DOCKER_IMAGE}:${DOCKER_TAG}"
             }
         }
+        stage('Run Docker Container') {
+                    steps {
+                        bat """
+                        docker rm -f ${CONTAINER_NAME} || echo Container does not exist
+                        docker run -d ^
+                            --name ${CONTAINER_NAME} ^
+                            -e DB_URL=${DB_URL} ^
+                            -e DB_USER=${DB_USER} ^
+                            -e DB_PASS=${DB_PASS} ^
+                            -p ${APP_PORT}:${APP_PORT} ^
+                            ${DOCKER_IMAGE}:${DOCKER_TAG}
+                        """
+                    }
+                }
     }
 }
