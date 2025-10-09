@@ -45,19 +45,6 @@ pipeline {
                 bat "docker push ${DOCKER_IMAGE}:${DOCKER_TAG}"
             }
         }
-        stage('Run Docker Container') {
-                    steps {
-                        bat """
-                        docker rm -f ${env.CONTAINER_NAME} || echo Container does not exist
-                        docker run -d ^
-                            --name ${env.CONTAINER_NAME} ^
-                            -e DB_URL=${env.DB_URL} ^
-                            -e DB_USER=${env.DB_USER} ^
-                            -e DB_PASS=${env.DB_PASS} ^
-                            -p ${env.APP_PORT}:${env.APP_PORT} ^
-                            ${env.DOCKER_IMAGE}:${env.DOCKER_TAG}
-                        """
-                    }
-                }
+//
     }
 }
